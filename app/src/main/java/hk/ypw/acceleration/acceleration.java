@@ -44,18 +44,18 @@ public class acceleration extends Activity {
 	 */
 	long uiId;
 
-	int accdelay = 1000,gpsdelay=3000,gyrodelay=1000,magdelay=1000,oridelay=1000;
-	String filepath = Environment.getExternalStorageDirectory()+"/Acceleration/output.txt";
+	int accdelay = 1000, gpsdelay = 3000, gyrodelay = 1000, magdelay = 1000, oridelay = 1000;
+	String filepath = Environment.getExternalStorageDirectory() + "/Acceleration/output.txt";
 	/*
 	 * (acc代表加速度,gps代表GPS,gyro代表陀螺仪,ori代表方向传感器)
 	 * 上面的三个delay分别控制三个传感器的速度,然后filepath代表的是保存的文件路径
 	 */
 
-	long nowtimeacc=0,lasttimeacc=SystemClock.elapsedRealtime();
-	long nowtimegps=0,lasttimegps=SystemClock.elapsedRealtime();
-	long nowtimegyro=0,lasttimegyro=SystemClock.elapsedRealtime();
-	long nowtimemag=0,lasttimemag=SystemClock.elapsedRealtime();
-	long nowtimeori=0,lasttimeori=SystemClock.elapsedRealtime();
+	long nowtimeacc = 0, lasttimeacc = SystemClock.elapsedRealtime();
+	long nowtimegps = 0, lasttimegps = SystemClock.elapsedRealtime();
+	long nowtimegyro = 0, lasttimegyro = SystemClock.elapsedRealtime();
+	long nowtimemag = 0, lasttimemag = SystemClock.elapsedRealtime();
+	long nowtimeori = 0, lasttimeori = SystemClock.elapsedRealtime();
 
 	/*
 	 * 这些是做延迟处理的参数,利用时间戳的差来进行延迟处理
@@ -65,17 +65,16 @@ public class acceleration extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_acceleration);
-		uiId=Thread.currentThread().getId();
+		uiId = Thread.currentThread().getId();
 		/*
 		 * 初始化layout
 		 * 获取UI线程ID,避免在其他线程中调用show函数导致程序崩溃
 		 */
 
-		tv_satellites = (TextView)this.findViewById(R.id.textview_gps2);
+		tv_satellites = (TextView) this.findViewById(R.id.textview_gps2);
 
 
-		if (!android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-		{
+		if (!android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
 			show("找不到SD卡");
 			finish();
 		}
@@ -84,18 +83,18 @@ public class acceleration extends Activity {
 		 */
 
 
-		String SDPATH=Environment.getExternalStorageDirectory()+"/";
-		File dir=new File(SDPATH+"Acceleration");
+		String SDPATH = Environment.getExternalStorageDirectory() + "/";
+		File dir = new File(SDPATH + "Acceleration");
 		dir.mkdir();
 		/*
 		 * 如果文件夹Acceleration不存在就创建一个
 		 */
 
 
-		File file=new File(filepath);
+		File file = new File(filepath);
 		try {
-			FileWriter writer = new FileWriter(file,true);
-			writer.write(System.currentTimeMillis()+ ":System start." +"\r\n");
+			FileWriter writer = new FileWriter(file, true);
+			writer.write(System.currentTimeMillis() + ":System start." + "\r\n");
 			writer.close();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -107,37 +106,38 @@ public class acceleration extends Activity {
 		 */
 
 		SensorManager sensorManager;
-		sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+		sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
 		Sensor accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		sensorManager.registerListener(new SensorEventListener() {
 			public void onSensorChanged(SensorEvent event) {
-				nowtimeacc=SystemClock.elapsedRealtime();
+				nowtimeacc = SystemClock.elapsedRealtime();
 				/*
 				 * 创建一个加速度sensor,监听sensor改变的事件
 				 * 然后取出x,y,z,进行处理之后显示在屏幕上
 				 */
-				float x=event.values[0],y=event.values[1],z=event.values[2];
-				String output = "";String output2 = "";
-				output+="AccX=\t"+String.valueOf(x)+"\r\n";
-				output+="AccY=\t"+String.valueOf(y)+"\r\n";
-				output+="AccZ=\t"+String.valueOf(z);
+				float x = event.values[0], y = event.values[1], z = event.values[2];
+				String output = "";
+				String output2 = "";
+				output += "AccX=\t" + String.valueOf(x) + "\r\n";
+				output += "AccY=\t" + String.valueOf(y) + "\r\n";
+				output += "AccZ=\t" + String.valueOf(z);
 
-				if(nowtimeacc-lasttimeacc>=accdelay)
-				{
+				if (nowtimeacc - lasttimeacc >= accdelay) {
 					/*
 					 * 取出现在的时间和上一次写入文件的时间点的时间差,如果大于accdelay那么就重新赋值并写入数据到文件中
 					 * 格式如下:时间戳,acc,x,y,z
 					 * 例子:1411137519350,acc,0.08244324,0.1593628,9.890015
 					 */
-					lasttimeacc=nowtimeacc;
-					output2+=System.currentTimeMillis()+",acc,"+x+","+y+","+z+"\r\n";
-					appendText(filepath,output2);
+					lasttimeacc = nowtimeacc;
+					output2 += System.currentTimeMillis() + ",acc," + x + "," + y + "," + z + "\r\n";
+					appendText(filepath, output2);
 				}
 
-				TextView outpuTextView =(TextView)findViewById(R.id.textview_acc);
+				TextView outpuTextView = (TextView) findViewById(R.id.textview_acc);
 				outpuTextView.setText(output);
 			}
+
 			public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			}
 		}, accSensor, SensorManager.SENSOR_DELAY_GAME);
@@ -151,29 +151,30 @@ public class acceleration extends Activity {
 				/*
 				 * 陀螺仪和加速度传感类似,这里是一样的写法
 				 */
-				nowtimegyro=SystemClock.elapsedRealtime();
-				float x=event.values[0],y=event.values[1],z=event.values[2];
-				String output = "";String output2 = "";
-				output+="GyroX=\t"+String.valueOf(x)+"\r\n";
-				output+="GyroY=\t"+String.valueOf(y)+"\r\n";
-				output+="GyroZ=\t"+String.valueOf(z)+"\r\n";
+				nowtimegyro = SystemClock.elapsedRealtime();
+				float x = event.values[0], y = event.values[1], z = event.values[2];
+				String output = "";
+				String output2 = "";
+				output += "GyroX=\t" + String.valueOf(x) + "\r\n";
+				output += "GyroY=\t" + String.valueOf(y) + "\r\n";
+				output += "GyroZ=\t" + String.valueOf(z) + "\r\n";
 
-				if(nowtimegyro-lasttimegyro>=gyrodelay)
-				{
-					lasttimegyro=nowtimegyro;
-					output2+=System.currentTimeMillis()+",gyro,"+x+","+y+","+z+"\r\n";
+				if (nowtimegyro - lasttimegyro >= gyrodelay) {
+					lasttimegyro = nowtimegyro;
+					output2 += System.currentTimeMillis() + ",gyro," + x + "," + y + "," + z + "\r\n";
 					/*
 					 * 格式:时间戳,gyro,x,y,z
 					 * 例子:1411137519351,gyro,-0.0019989014,0.0012512207,-0.0011444092
 					 * 由于大部分时间我们都没有旋转,角速度为0,所以通常陀螺仪的数据都非常小
 					 */
-					appendText(filepath,output2);
+					appendText(filepath, output2);
 				}
 
-				TextView outpuTextView =(TextView)findViewById(R.id.textview_gyro);
+				TextView outpuTextView = (TextView) findViewById(R.id.textview_gyro);
 				outpuTextView.setText(output);
 
 			}
+
 			public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			}
 		}, gyroSensor, SensorManager.SENSOR_DELAY_GAME);
@@ -184,25 +185,26 @@ public class acceleration extends Activity {
 				/*
 				 * 磁场和加速度传感类似,这里是一样的写法
 				 */
-				nowtimeori=SystemClock.elapsedRealtime();
+				nowtimeori = SystemClock.elapsedRealtime();
 
-				float x=event.values[0],y=event.values[1],z=event.values[2];
-				String output = "";String output2 = "";
-				output+="MagX=\t"+String.valueOf(x)+"\r\n";
-				output+="MagY=\t"+String.valueOf(y)+"\r\n";
-				output+="MagZ=\t"+String.valueOf(z)+"\r\n";
+				float x = event.values[0], y = event.values[1], z = event.values[2];
+				String output = "";
+				String output2 = "";
+				output += "MagX=\t" + String.valueOf(x) + "\r\n";
+				output += "MagY=\t" + String.valueOf(y) + "\r\n";
+				output += "MagZ=\t" + String.valueOf(z) + "\r\n";
 
-				if(nowtimemag-lasttimemag>=magdelay)
-				{
-					lasttimemag=nowtimemag;
-					output2+=System.currentTimeMillis()+",mag,"+x+","+y+","+z+"\r\n";
-					appendText(filepath,output2);
+				if (nowtimemag - lasttimemag >= magdelay) {
+					lasttimemag = nowtimemag;
+					output2 += System.currentTimeMillis() + ",mag," + x + "," + y + "," + z + "\r\n";
+					appendText(filepath, output2);
 				}
 
-				TextView outpuTextView =(TextView)findViewById(R.id.textview_mag);
+				TextView outpuTextView = (TextView) findViewById(R.id.textview_mag);
 				outpuTextView.setText(output);
 
 			}
+
 			public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			}
 		}, magSensor, SensorManager.SENSOR_DELAY_GAME);
@@ -213,29 +215,29 @@ public class acceleration extends Activity {
 				/*
 				 * 方向传感器,这里也是一样的写法
 				 */
-				nowtimemag=SystemClock.elapsedRealtime();
+				nowtimemag = SystemClock.elapsedRealtime();
 
-				float x=event.values[0],y=event.values[1],z=event.values[2];
-				String output = "";String output2 = "";
-				output+="OriX=\t"+String.valueOf(x)+"\r\n";
-				output+="OriY=\t"+String.valueOf(y)+"\r\n";
-				output+="OriZ=\t"+String.valueOf(z)+"\r\n";
+				float x = event.values[0], y = event.values[1], z = event.values[2];
+				String output = "";
+				String output2 = "";
+				output += "OriX=\t" + String.valueOf(x) + "\r\n";
+				output += "OriY=\t" + String.valueOf(y) + "\r\n";
+				output += "OriZ=\t" + String.valueOf(z) + "\r\n";
 
-				if(nowtimeori-lasttimeori>=oridelay)
-				{
-					lasttimeori=nowtimeori;
-					output2+=System.currentTimeMillis()+",ori,"+x+","+y+","+z+"\r\n";
-					appendText(filepath,output2);
+				if (nowtimeori - lasttimeori >= oridelay) {
+					lasttimeori = nowtimeori;
+					output2 += System.currentTimeMillis() + ",ori," + x + "," + y + "," + z + "\r\n";
+					appendText(filepath, output2);
 				}
 
-				TextView outpuTextView =(TextView)findViewById(R.id.textview_ori);
+				TextView outpuTextView = (TextView) findViewById(R.id.textview_ori);
 				outpuTextView.setText(output);
 
 			}
+
 			public void onAccuracyChanged(Sensor sensor, int accuracy) {
 			}
 		}, oriSensor, SensorManager.SENSOR_DELAY_GAME);
-
 
 
 		openGPSSetting();
@@ -249,22 +251,22 @@ public class acceleration extends Activity {
 				/*
 				 * 这里我们注册了一个当位置变化的时候的事件
 				 */
-				TextView gpsTextView = (TextView)findViewById(R.id.textview_gps);
+				TextView gpsTextView = (TextView) findViewById(R.id.textview_gps);
 
 				/*
 				 * 下面输出了经纬度,如果时间超过了gpsdelay就在文件中添加GPS数据
 				 * 时间戳,gps,经度,纬度
 				 * 例子:1411137497047,gps,116.158073,39.71972
 				 */
-				nowtimegps=SystemClock.elapsedRealtime();
-				if (location != null) {gpsTextView.setText("经度(Longitude):" + location.getLongitude() + "\r\n纬度(Latitude):"
-						+ location.getLatitude());
-					if(nowtimegps-lasttimegps>gpsdelay)
-					{
-						lasttimegps=nowtimegps;
-						String output=System.currentTimeMillis()+",gps,"+location.getLongitude()
-								+","+location.getLatitude()+"\r\n";
-						appendText(filepath,output);
+				nowtimegps = SystemClock.elapsedRealtime();
+				if (location != null) {
+					gpsTextView.setText("经度(Longitude):" + location.getLongitude() + "\r\n纬度(Latitude):"
+							+ location.getLatitude());
+					if (nowtimegps - lasttimegps > gpsdelay) {
+						lasttimegps = nowtimegps;
+						String output = System.currentTimeMillis() + ",gps," + location.getLongitude()
+								+ "," + location.getLatitude() + "\r\n";
+						appendText(filepath, output);
 					}
 
 					// Location类的方法：
@@ -276,14 +278,17 @@ public class acceleration extends Activity {
 					// getProvider():位置提供者（GPS／NETWORK）
 					// getSpeed():速度
 					// getTime():时刻
-				}else gpsTextView.setText("无法获取到GPS的位置信息");
+				} else gpsTextView.setText("无法获取到GPS的位置信息");
 			}
 
-			public void onStatusChanged(String provider, int status, Bundle extras) {}
+			public void onStatusChanged(String provider, int status, Bundle extras) {
+			}
 
-			public void onProviderEnabled(String provider) {}
+			public void onProviderEnabled(String provider) {
+			}
 
-			public void onProviderDisabled(String provider) {}
+			public void onProviderDisabled(String provider) {
+			}
 		};
 
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
@@ -293,11 +298,11 @@ public class acceleration extends Activity {
 		locationManager.addGpsStatusListener(statusListener);
 	}
 
-	public void appendText(String filepathString,String outputString) {
+	public void appendText(String filepathString, String outputString) {
 		FileWriter writer;
 		try {
-			File file=new File(filepathString);
-			writer = new FileWriter(file,true);
+			File file = new File(filepathString);
+			writer = new FileWriter(file, true);
 			writer.write(outputString);
 			writer.close();
 		} catch (IOException e) {
