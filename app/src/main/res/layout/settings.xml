@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/edit_filename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="output.txt" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acceleration 加速度延时(ms)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/edit_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" android:inputType="none">
+
+        <requestFocus />
+    </EditText>
+    
+    
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS 延时(ms)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/edit_gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" android:inputType="none">
+
+        <requestFocus />
+    </EditText>
+    
+    
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gyroscope 陀螺仪延时(ms)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/edit_gyro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" android:inputType="none">
+        <requestFocus />
+    </EditText>
+    
+	<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Magnetic 磁场延时(ms)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/edit_mag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" android:inputType="none">
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ORIENTATION 方向传感器延时(ms)"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/edit_ori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" android:inputType="none">
+        <requestFocus />
+    </EditText>
+    
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="save"
+        android:text="Save" />
+
+	</LinearLayout>
+</ScrollView>

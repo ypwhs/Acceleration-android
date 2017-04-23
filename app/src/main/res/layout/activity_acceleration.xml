@@ -1,0 +1,114 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="hk.ypw.acceleration.Acceleration" >
+
+    <TextView
+        android:id="@+id/textview_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Large Text\nLarge Text\nLarge Text\n"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+
+    <Button
+        android:id="@+id/button_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="clear"
+        android:text="Clear" />
+
+    <Button
+        android:id="@+id/button_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button_clear"
+        android:layout_below="@+id/button_clear"
+        android:layout_marginTop="4dp"
+        android:onClick="openthefile"
+        android:text="openthefile" />
+
+
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textview_settings"
+        android:layout_below="@+id/textview_settings" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/textview_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Getting Acc"
+        android:textAppearance="?android:attr/textAppearanceLarge" />        
+            
+    <TextView
+        android:id="@+id/textview_gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Searching GPS"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+        <TextView
+        android:id="@+id/textview_gps2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Searching GPS" />
+
+    <TextView
+        android:id="@+id/textview_gyro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Getting Gyro"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+    <TextView
+        android:id="@+id/textview_mag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Getting Mag"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <TextView
+        android:id="@+id/textview_ori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Getting Ori"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/Button01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_clear"
+        android:layout_alignBottom="@+id/button_clear"
+        android:layout_toLeftOf="@+id/button_clear"
+        android:onClick="quit"
+        android:text="Quit" />
+
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <issue id="HardcodedText">
+        <ignore path="res/layout/activity_acceleration.xml" />
+        <ignore path="res/layout/settings.xml" />
+    </issue>
+    <issue id="TextFields">
+        <ignore path="res/layout/activity_acceleration.xml" />
+    </issue>
+</lint>
