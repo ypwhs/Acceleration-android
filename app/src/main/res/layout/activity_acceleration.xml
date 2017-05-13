@@ -6,17 +6,23 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="hk.ypw.acceleration.Acceleration" >
+    tools:context="hk.ypw.acceleration.acceleration">
 
     <TextView
         android:id="@+id/textview_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
         android:text="Large Text\nLarge Text\nLarge Text\n"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true" />
 
-
+    <TextView
+        android:id="@+id/textview_filesize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_settings"
+        android:layout_alignLeft="@id/textview_settings"
+        android:text="FileSize"/>
 
     <Button
         android:id="@+id/button_clear"
@@ -37,72 +43,8 @@
         android:onClick="openthefile"
         android:text="openthefile" />
 
-
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textview_settings"
-        android:layout_below="@+id/textview_settings" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-    
-    <TextView
-        android:id="@+id/textview_acc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Getting Acc"
-        android:textAppearance="?android:attr/textAppearanceLarge" />        
-            
-    <TextView
-        android:id="@+id/textview_gps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Searching GPS"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-        <TextView
-        android:id="@+id/textview_gps2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Searching GPS" />
-
-    <TextView
-        android:id="@+id/textview_gyro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Getting Gyro"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-    <TextView
-        android:id="@+id/textview_mag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Getting Mag"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    <TextView
-        android:id="@+id/textview_ori"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Getting Ori"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-        </LinearLayout>
-    </ScrollView>
-
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/button_quit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/button_clear"
@@ -110,5 +52,76 @@
         android:layout_toLeftOf="@+id/button_clear"
         android:onClick="quit"
         android:text="Quit" />
+
+    <Button
+        android:id="@+id/button_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_clear"
+        android:layout_alignBottom="@+id/button_clear"
+        android:layout_toLeftOf="@+id/button_quit"
+        android:onClick="scan"
+        android:text="Scan" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textview_settings"
+        android:layout_below="@+id/textview_filesize"
+        android:layout_marginTop="@dimen/mtop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mtop"
+                android:text="Getting Acc" />
+
+            <TextView
+                android:id="@+id/textview_gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mtop"
+                android:text="Searching GPS" />
+
+            <TextView
+                android:id="@+id/textview_gyro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mtop"
+                android:text="Getting Gyro"/>
+
+            <TextView
+                android:id="@+id/textview_mag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mtop"
+                android:text="Getting Mag"/>
+
+            <TextView
+                android:id="@+id/textview_ori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mtop"
+                android:text="Getting Ori" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton"
+        android:layout_alignBaseline="@+id/button_open"
+        android:layout_alignBottom="@+id/button_open"
+        android:layout_toLeftOf="@+id/button_open"
+        android:onClick="toggle"/>
 
 </RelativeLayout>
